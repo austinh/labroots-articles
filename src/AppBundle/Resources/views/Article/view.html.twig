@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Viewing Article{% endblock %}
+
+
+{% block body %}
+    <h2>{{ article.title }}</h2>
+    <h4>Posted by <a href="#">{{ article.author }}</a> on {{ article.createdAt|date("Y-m-d H:i:s") }}</h4>
+    <p>{{ article.content }}</p>
+
+    <hr/>
+    <h3>Comments ({{ article.comments.count }})</h3>
+    <div id="comments">
+
+        {% if article.comments.count < 0 %}
+            No comments.
+        {% endif %}
+
+        {% for comment in article.comments %}
+            {% include 'AppBundle:Article:comment.html.twig' with {comment: comment} %}
+        {% endfor %}
+
+    </div>
+    <hr/>
+    <center>
+        <h3>Post A Comment</h3>
+
+        <div id="comment-form">
+            {{ form(form) }}
+        </div>
+        <p></p>
+
+        <p><a href="{{ path('homepage') }}">Back to Article List</a></p>
+    </center>
+{% endblock body %}

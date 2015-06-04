@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article List{% endblock %}
+
+{% block body %}
+    <h1>List of Articles</h1>
+    <hr/>
+    {% for article in articles %}
+        <h2>{{ article.title }}</h2>
+        <h4>Posted by <a href="#">{{ article.author }}</a> on {{ article.createdAt|date("Y-m-d H:i:s") }}</h4>
+        <p>{{ article.content|truncate(50) }}</p>
+
+        <a href="{{ path('view_article', {id: article.id}) }}">Click here to view more</a>
+    {% endfor %}
+{% endblock %}
